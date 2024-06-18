@@ -1,0 +1,22 @@
+﻿.legend {
+    line-height: 18px;
+    color: #555;
+    opacity: 1;
+    background: white;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 1;
+
+}
+
+.ol-custom {
+    z-index: 1000;
+    bottom: 0px;
+    opacity: 1;
+
+}
