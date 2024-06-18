@@ -133,10 +133,7 @@
 </body>
 <script>
 
-    /*var mon_poly = {
-        "type": "FeatureCollection",
-        "features": []
-    }*/
+    var url_serveur = 'https://api.geosas.fr/edr/collections/safran-isba'
     var serviceI
     var parameterName
     var x_position
@@ -241,7 +238,7 @@
                 fin = date_fin.value
 
                 console.log(start, fin)
-                fetch('https://api.geosas.fr/edr/collections/safran-isba/position?coords=POINT(' + x_position + ' ' + y_position + ')&crs=EPSG:2154&parameter-name=' + parameterName + '&f=CoverageJSON&datetime=' + start + '/' + fin)
+                fetch(url_serveur + '/position?coords=POINT(' + x_position + ' ' + y_position + ')&crs=EPSG:2154&parameter-name=' + parameterName + '&f=CoverageJSON&datetime=' + start + '/' + fin)
                     .then(response => response.json())
                     .then(function (data) {
                         div_plot = document.getElementById('tester')
@@ -381,7 +378,7 @@
         date_fin = document.getElementById("date_fin")
         fin = date_fin.value
         format = document.getElementById("format").value
-        url_DL = 'https://api.geosas.fr/edr/collections/safran-isba/position?coords=POINT(' + x_position + ' ' + y_position + ')&crs=EPSG:2154&parameter-name=' + parameterName + '&f=' + format + '&datetime=' + start + '/' + fin
+        url_DL = url_serveur + '/position?coords=POINT(' + x_position + ' ' + y_position + ')&crs=EPSG:2154&parameter-name=' + parameterName + '&f=' + format + '&datetime=' + start + '/' + fin
         alert("le téléchargement va s'executer dans une nouvelle fenetre")
         window.open(url_DL, '_blank');
     }
@@ -399,7 +396,7 @@
             fin = date_fin.value
             format = document.getElementById("format").value
             box = bbox[0].toString() + "," + bbox[1].toString() + "," + bbox[2].toString() + "," + bbox[3].toString()
-            url_DL = 'https://api.geosas.fr/edr/collections/safran-isba/cube?bbox=' + box + '&crs=EPSG:2154&parameter-name=' + parameterName + '&f=' + format + '&datetime=' + start + '/' + fin
+            url_DL = url_serveur + '/cube?bbox=' + box + '&crs=EPSG:2154&parameter-name=' + parameterName + '&f=' + format + '&datetime=' + start + '/' + fin
             console.log(url_DL)
             alert("le téléchargement va s'executer dans une nouvelle fenetre")
             window.open(url_DL, '_blank');
@@ -520,7 +517,7 @@
         } else {
             datetime = '1970-01-01T00:00Z'
         }
-        fetch("https://api.geosas.fr/edr/collections/safran-isba/cube?parameter-name=" + parameterName + "&bbox=" + bounding_box + "&datetime=" + datetime + "&f=CoverageJSON&crs=EPSG:2154")
+        fetch(url_serveur + "/cube?parameter-name=" + parameterName + "&bbox=" + bounding_box + "&datetime=" + datetime + "&f=CoverageJSON&crs=EPSG:2154")
             .then(response => response.json())
             .then(function (data) {
                 console.log(data)
@@ -716,7 +713,7 @@
 
     }
     function starter() {
-        fetch("https://api.geosas.fr/edr/collections/safran-isba")
+        fetch(url_serveur)
             .then(response => response.json())
             .then(function (data) {
                 serviceI = data
