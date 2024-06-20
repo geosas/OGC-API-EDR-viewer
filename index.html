@@ -347,16 +347,7 @@
 
     }
 
-    function get_description() {
 
-        selectParam = document.getElementById("parameterN")
-        id = selectParam.selectedIndex
-        name = selectParam.value
-        txt = serviceI['parameter_names'][id][name]['description']
-        descriptionN = document.getElementById("descriptionN");
-        descriptionN.innerHTML = txt;
-        //parameterName =selectParam.value
-    }
 
     function set_date(mini, maxi) {
         console.log(mini, maxi)
@@ -738,22 +729,22 @@
                     option.text =  Object.keys(data['parameter_names'][i])[0];
                     selectParam.add(option)
                 }*/
-                parameterName = Object.keys(data['parameter_names'][0])[0]
-                for (i = 0; i < data['parameter_names'].length; i++) {
+                parameterName = Object.keys(data['parameter_names'])[0]
+                for (let [idp, value] of Object.entries(data['parameter_names'])) {
 
-                    console.log(Object.keys(data['parameter_names'][i])[0])
-                    idp = Object.keys(data['parameter_names'][i])[0]
+                    console.log(idp)
+
 
                     divP = document.createElement("div");
                     inputP = document.createElement("input");
                     labelP = document.createElement("label");
 
-                    labelP.innerText = " " + Object.keys(data['parameter_names'][i])[0] + ", " +
-                        data['parameter_names'][i][idp]['description'] + " en " +
-                        data['parameter_names'][i][idp]['unit']['symbol']['value']
+                    labelP.innerText = " " + idp + ", " +
+                        value['description'] + " en " +
+                        value['unit']['symbol']['value']
                     labelP.class = "checkbox"
 
-                    inputP.value = Object.keys(data['parameter_names'][i])[0];
+                    inputP.value = idp;
                     inputP.type = "checkbox"
                     inputP.className = "parameterName"
 
@@ -764,7 +755,7 @@
 
                 }
 
-                //get_description()
+
                 set_date(data['extent']['temporal']['interval'][0][0].substr(0, 10), data['extent']['temporal']['interval'][0][1].substr(0, 10))
                 get_description_format()
                 plot_maille(true, "100818,6043571,1251828,7122643")
